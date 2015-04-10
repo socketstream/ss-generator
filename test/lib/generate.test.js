@@ -4,7 +4,7 @@
 
 var assert                                = require('assert'),
     exec                                  = require('child_process').exec,
-    logHook                               = require('./../helpers/logHook.js'),
+    logHook                               = require('../helpers/loghook.js'),
     fs                                    = require('fs'),
     path                                  = require('path'),
     async                                 = require('async'),
