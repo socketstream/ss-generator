@@ -86,25 +86,29 @@ describe('lib/generate', function () {
 
         /* hide console.log output to make Mocha output clear */
         logHook.on();
-        generate.generate(program);
+        generate.generate(program, function () {
 
-        logs = logHook.off();
+            logs = logHook.off();
 
-        /* Using 'async' library to check if all the required project's folders exist */
-        async.reject(newProjectDirectoriesThatShouldExist, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            /* Using 'async' library to check if all the required project's folders exist */
+            async.reject(newProjectDirectoriesThatShouldExist, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
 
     });
 
     it('should raise an error if the name of the app matches the name of an existing folder', function (done) {
+        this.timeout(10000);
 
         fs.mkdir(demoAppPath, function(err) {
 
             // Call for hook function for console.log
             logHook.on();
             generate.generate(program);
+
             logs = logHook.off();
 
             assert.equal(1,logs.length);
@@ -118,6 +122,7 @@ describe('lib/generate', function () {
             } else {
                 done();
             }
+
         });
     });
 
@@ -134,14 +139,18 @@ describe('lib/generate', function () {
 
         /* hide console.log output to make Mocha output clear */
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's coffeescript files exist */
-        async.reject(newProjectFilesThatShouldExistWhenUsingCoffeeScript, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's coffeescript files exist */
+            async.reject(newProjectFilesThatShouldExistWhenUsingCoffeeScript, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
+
     });
 
     it('should raise an error if no name is provided for the app', function (done) {
@@ -173,13 +182,16 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's jade files exist */
-        async.reject(newProjectFilesThatShouldExistWhenUsingJade, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's jade files exist */
+            async.reject(newProjectFilesThatShouldExistWhenUsingJade, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
 
     });
@@ -192,13 +204,16 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's css files exist */
-        async.reject(newProjectFilesThatShouldExistWhenUsingCss, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's css files exist */
+            async.reject(newProjectFilesThatShouldExistWhenUsingCss, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
 
     });
@@ -213,13 +228,16 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's less files exist */
-        async.reject(newProjectFilesThatShouldExistWhenUsingLess, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's less files exist */
+            async.reject(newProjectFilesThatShouldExistWhenUsingLess, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
 
     });
@@ -234,13 +252,16 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's less files exist */
-        async.reject(newProjectFilesThatShouldExistWhenUsingStylus, fs.exists, function (result) {
-            assert.equal(0,result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's less files exist */
+            async.reject(newProjectFilesThatShouldExistWhenUsingStylus, fs.exists, function (result) {
+                assert.equal(0,result.length);
+                done();
+            });
+
         });
 
     });
@@ -259,14 +280,18 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        /* Using 'async' library to check if all the required project's coffeescript files exist */
-        async.reject(newProjectFilesThatBelongToDemo, fs.exists, function (result) {
-            assert.equal(newProjectFilesThatBelongToDemo.length, result.length);
-            done();
+            logs = logHook.off();
+
+            /* Using 'async' library to check if all the required project's coffeescript files exist */
+            async.reject(newProjectFilesThatBelongToDemo, fs.exists, function (result) {
+                assert.equal(newProjectFilesThatBelongToDemo.length, result.length);
+                done();
+            });
+
         });
+
     });
 
     it('should generate an app with the ss-console library, if the repl library was requested', function (done) {
@@ -275,17 +300,20 @@ describe('lib/generate', function () {
 
         // Call for hook function for console.log
         logHook.on();
-        generate.generate(program);
-        logs = logHook.off();
+        generate.generate(program, function () {
 
-        fs.readFile(path.join(demoAppPath,'/app.js'), 'utf-8', function (err, appJsContents) {
-            assert.notEqual(-1, appJsContents.indexOf('// Start Console Server (REPL)'));
-            assert.notEqual(-1, appJsContents.indexOf('// To install client: sudo npm install -g ss-console'));
-            assert.notEqual(-1, appJsContents.indexOf('// To connect: ss-console <optional_host_or_port>'));
-            assert.notEqual(-1, appJsContents.indexOf('var consoleServer = require(\'ss-console\')(ss);'));
-            assert.notEqual(-1, appJsContents.indexOf('consoleServer.listen(5000);'));
-            done();
+            logs = logHook.off();
 
+            fs.readFile(path.join(demoAppPath,'/app.js'), 'utf-8', function (err, appJsContents) {
+                assert.notEqual(-1, appJsContents.indexOf('// Start Console Server (REPL)'));
+                assert.notEqual(-1, appJsContents.indexOf('// To install client: sudo npm install -g ss-console'));
+                assert.notEqual(-1, appJsContents.indexOf('// To connect: ss-console <optional_host_or_port>'));
+                assert.notEqual(-1, appJsContents.indexOf('var consoleServer = require(\'ss-console\')(ss);'));
+                assert.notEqual(-1, appJsContents.indexOf('consoleServer.listen(5000);'));
+                done();
+            });
+            
         });
+
     });
 });
