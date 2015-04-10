@@ -156,9 +156,9 @@ describe('lib/generate', function () {
         program.args = ['new'];
 
         // Call for hook function for console.log
-        logHook.on();
+        // logHook.on();
         generate.generate(program);
-        logs = logHook.off();
+        // logs = logHook.off();
 
         assert.equal(1,logs.length);
         assert.equal(
