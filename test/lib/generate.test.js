@@ -24,9 +24,7 @@ var assert                                = require('assert'),
  * @return {Void}
  */
 function removeForcefully (dirPath, cb) {
-    exec('rm -rf '+ dirPath, function(err){
-        cb(err);
-    });
+    exec('rm -rf ' + dirPath, cb);
 }
 
 /**
@@ -312,7 +310,7 @@ describe('lib/generate', function () {
                 assert.notEqual(-1, appJsContents.indexOf('consoleServer.listen(5000);'));
                 done();
             });
-            
+
         });
 
     });
