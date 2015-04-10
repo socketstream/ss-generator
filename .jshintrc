@@ -14,7 +14,12 @@
     "module",
     "process",
     "require",
-    "setInterval"
+    "setInterval",
+    "ss",
+    "$",
+    "alert",
+    "window",
+    "jQuery"
   ],
   "strict": true,
   "trailing": true,
