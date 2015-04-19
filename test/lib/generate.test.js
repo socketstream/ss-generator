@@ -8,6 +8,7 @@ var assert                                = require('assert'),
     fs                                    = require('fs'),
     path                                  = require('path'),
     async                                 = require('async'),
+    Gently                                = require('gently'),
     generate                              = require(path.join(process.env.PWD, 'lib/generate')),
     demoAppEndDir                         = 'test/results/my_app',
     demoAppPath                           = path.join(process.env.PWD, demoAppEndDir),
@@ -174,6 +175,27 @@ describe('lib/generate.js', function () {
         done();
 
     });
+
+    it('should raise an error if another error occurs when trying to create the app', function (done) {
+
+        var gently = new Gently();
+        gently.expect(fs, 'mkdirSync', function (folderPath, dirMode) {
+            throw new Error('a test error being thrown');
+        });
+        program.args = ['new', demoAppEndDir];
+        logHook.on();
+        generate.generate(program);
+        logs = logHook.off();
+        console.log('got here');
+        assert.equal(1,logs.length);
+        assert.equal(
+            'An error occurred trying to create the application folder, error message: a test error being thrown',
+            logs[0].toString()
+        );
+        done();
+
+    });
+
 
     it('should generate an app with jade templates if jade was requested', function (done) {
 
