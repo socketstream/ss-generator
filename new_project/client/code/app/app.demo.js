@@ -1,7 +1,26 @@
 'use strict';
+
+
 /* QUICK CHAT DEMO */
 
 // Delete this file once you've seen how the demo works
+
+// Private functions
+
+function pad2(number) {
+  return (number < 10 ? '0' : '') + number;
+}
+
+function timestamp() {
+  var d = new Date();
+  return d.getHours() + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
+}
+
+function valid(text) {
+  return text && text.length > 0;
+}
+
+// Main code
 
 // Listen out for newMessage events coming from the server
 ss.event.on('newMessage', function(message) {
@@ -40,19 +59,3 @@ exports.send = function(text, cb) {
     return cb(false);
   }
 };
-
-
-// Private functions
-
-function timestamp() {
-  var d = new Date();
-  return d.getHours() + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
-}
-
-function pad2(number) {
-  return (number < 10 ? '0' : '') + number;
-}
-
-function valid(text) {
-  return text && text.length > 0;
-}

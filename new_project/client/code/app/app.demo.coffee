@@ -2,6 +2,20 @@
 
 # Delete this file once you've seen how the demo works
 
+# Private functions
+
+pad2 = (number) ->
+  (if number < 10 then '0' else '') + number
+
+timestamp = ->
+  d = new Date()
+  d.getHours() + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds())
+
+valid = (text) ->
+  text && text.length > 0
+
+# Main Code
+
 # Listen out for newMessage events coming from the server
 ss.event.on 'newMessage', (message) ->
 
@@ -21,27 +35,14 @@ $('#demo').on 'submit', ->
   # Call the 'send' funtion (below) to ensure it's valid before sending to the server
   exports.send text, (success) ->
     if success
-      $('#myMessage').val('') # clear text box
+      $('#myMessage').val '' # clear text box
     else
       alert('Oops! Unable to send message')
 
 
 # Demonstrates sharing code between modules by exporting function
 exports.send = (text, cb) ->
-  if valid(text)
-    ss.rpc('demo.sendMessage', text, cb)
+  if valid text
+    ss.rpc 'demo.sendMessage', text, cb
   else
-    cb(false)
-
-
-# Private functions
-
-timestamp = ->
-  d = new Date()
-  d.getHours() + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds())
-
-pad2 = (number) ->
-  (if number < 10 then '0' else '') + number
-
-valid = (text) ->
-  text && text.length > 0
+    cb false
