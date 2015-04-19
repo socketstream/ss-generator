@@ -45,7 +45,7 @@ function removeDirectoryIfExists (dirPath, cb) {
     });
 }
 
-describe('lib/generate', function () {
+describe('lib/generate.js', function () {
 
     beforeEach(function (done) {
 
@@ -154,15 +154,11 @@ describe('lib/generate', function () {
     it('should raise an error if no name is provided for the app', function (done) {
 
 
-        console.log('got here');
         program.args = ['new'];
-
         // Call for hook function for console.log
-        // logHook.on();
+        logHook.on();
         generate.generate(program);
-        // logs = logHook.off();
-        console.log('then here');
-
+        logs = logHook.off();
         assert.equal(1,logs.length);
         assert.equal(
             'Please provide a name for your application: $> socketstream new <MyAppName>',

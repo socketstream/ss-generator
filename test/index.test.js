@@ -4,7 +4,11 @@
 
 // Dependencies
 //
-// var Gently = require('gently');
+var assert      = require('assert');
+var Gently      = require('gently');
+var generator   = require('../lib/generate.js');
+var index       = require('../index.js');
+var gently      = new Gently();
 
 
 
@@ -18,9 +22,14 @@ describe('/index.js', function () {
 
     describe('when the 1st argument is n', function () {
 
-      it('should call the generator with the program arguments');
-      // For this, we stub the generator using Gently, and assert
-      // that it receives the expected arguments from the CLI module        
+      it('should call the generator with the program arguments', function (done) {
+        var program = {args: ['n', 'testapp']};
+        gently.expect(generator, 'generate', function (receivedProgram) {
+          assert.deepEqual(program,receivedProgram);
+          done();
+        });
+        index.process(program);
+      });
 
     });
 
@@ -28,9 +37,14 @@ describe('/index.js', function () {
 
     describe('when the 1st argument is new', function () {
 
-      it('should call the generator with the program arguments');
-      // For this, we stub the generator using Gently, and assert
-      // that it receives the expected arguments from the CLI module        
+      it('should call the generator with the program arguments', function (done) {
+        var program = {args: ['new', 'testapp']};
+        gently.expect(generator, 'generate', function (receivedProgram) {
+          assert.deepEqual(program,receivedProgram);
+          done();
+        });
+        index.process(program);
+      });
 
     });
 
@@ -38,8 +52,14 @@ describe('/index.js', function () {
 
     describe('when the 1st argument is neither "n" or "new"', function () {
 
-      it('should inform the user on how to use the application');
-      // NOTE - how do we capture this use case?
+      it('should inform the user on how to use the application', function (done) {
+        var program = {args: ['create', 'testapp']};
+        gently.expect(console, 'log', function (string) {
+          assert.deepEqual('Type "socketstream new <projectname>" to create a new application',string);
+          done();
+        });
+        index.process(program);
+      });
 
     });
 
