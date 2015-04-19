@@ -180,13 +180,14 @@ describe('lib/generate.js', function () {
 
         var gently = new Gently();
         gently.expect(fs, 'mkdirSync', function (folderPath, dirMode) {
+            assert.equal(demoAppEndDir, folderPath);
+            assert.equal('0755', dirMode);
             throw new Error('a test error being thrown');
         });
         program.args = ['new', demoAppEndDir];
         logHook.on();
         generate.generate(program);
         logs = logHook.off();
-        console.log('got here');
         assert.equal(1,logs.length);
         assert.equal(
             'An error occurred trying to create the application folder, error message: a test error being thrown',
