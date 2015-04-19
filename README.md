@@ -26,7 +26,7 @@ If you then wish to use it programmatically, run the following code:
 
 ```javascript
     var ssGenerator = require('ss-generator');
-    ss.process({args: ['new ', 'my_ss_app']}, function () {
+    ssGenerator.process({args: ['new ', 'my_ss_app']}, function () {
     	console.log('app created');
     });
 ```
