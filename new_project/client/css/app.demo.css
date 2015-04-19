@@ -75,7 +75,7 @@ h1 {
 #demo #chatlog p:last-child {
   padding-bottom: 9px;
 }
-#demo #chatlog span.time {
+#demo #chatlog .time {
   color: #666;
   float: right;
   width: 70px;
