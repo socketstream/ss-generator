@@ -144,7 +144,14 @@ describe('lib/generate.js', function () {
             /* Using 'async' library to check if all the required project's coffeescript files exist */
             async.reject(newProjectFilesThatShouldExistWhenUsingCoffeeScript, fs.exists, function (result) {
                 assert.equal(0,result.length);
-                done();
+                fs.readFile(newProjectFilesThatShouldExistWhenUsingCoffeeScript[0], {encoding:'utf8'}, function (errOne, srcAppFile) {
+                    assert.equal(null, errOne);
+                    fs.readFile(path.join(process.env.PWD, 'new_project/client/code/app/app.demo.coffee'), {encoding:'utf8'}, function (errTwo, dstAppFile) {
+                        assert.equal(null, errTwo);
+                        assert.equal(srcAppFile, dstAppFile);
+                        done();
+                    });
+                });
             });
 
         });
