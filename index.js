@@ -23,7 +23,7 @@ exports.process = function (program,cb) {
     // Create a new project
     case 'new':
     case 'n':
-      generator.generate(program,cb);
+      return generator.generate(program,cb);
     default:
       return console.log('Type "socketstream new <projectname>" to create a new application');
   }
