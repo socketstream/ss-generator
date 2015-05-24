@@ -1,6 +1,6 @@
 {
   "name": "ss-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SocketStream's app generator",
   "repository": "https://github.com/socketstream/ss-generator.git",
   "main": "index.js",
